@@ -4,6 +4,7 @@
 :root {
     --font-lexend: "Lexend", sans-serif;
     --color-accent: #e2e8f0;
+    --color-primary: #3b82f6;
     --color-background: #04070c;
     --color-surface: #131a25;
     --color-error: #ef4444;
@@ -13,6 +14,7 @@
 @theme {
     --font-lexend: "Lexend", sans-serif;
     --color-accent: var(--color-accent);
+    --color-primary: var(--color-primary);
     --color-background: var(--color-background);
     --color-surface: var(--color-surface);
     --color-error: var(--color-error);
