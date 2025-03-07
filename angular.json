@@ -5,11 +5,7 @@
     "projects": {
         "vacation-manager-ui": {
             "projectType": "application",
-            "schematics": {
-                "@schematics/angular:*": {
-                    "indentSize": 4
-                }
-            },
+            "schematics": {},
             "root": "",
             "sourceRoot": "src",
             "prefix": "app",
