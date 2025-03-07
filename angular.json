@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "vacation-manager": {
+    "vacation-manager-ui": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/vacation-manager",
+            "outputPath": "dist/vacation-manager-ui",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -59,10 +59,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "vacation-manager:build:production"
+              "buildTarget": "vacation-manager-ui:build:production"
             },
             "development": {
-              "buildTarget": "vacation-manager:build:development"
+              "buildTarget": "vacation-manager-ui:build:development"
             }
           },
           "defaultConfiguration": "development"
