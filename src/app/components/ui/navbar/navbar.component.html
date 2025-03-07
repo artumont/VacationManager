@@ -1,6 +1,8 @@
-<nav class="fixed flex flex-row w-full bg-primary p-2 px-10 justify-between">
-    <h1 class="text-xl">Vacation Manager</h1>
+<nav class="fixed flex flex-row w-full bg-surface p-4 px-10 justify-between">
+    <a routerLink="/" class="text-xl hover:cursor-pointer hover:text-accent/85">Vacation Manager UI</a>
     <div class="flex flex-row h-full w-auto">
-        <!--@todo Add buttons and routes-->
+        <a class="text-md px-3 hover:cursor-pointer hover:text-accent/85" routerLink="/request-vacations">Request Vacations</a>
+        <a class="text-md px-3 hover:cursor-pointer hover:text-accent/85" routerLink="/approve-vacations">Approve Vacations</a>
+        <a class="text-md px-3 hover:cursor-pointer hover:text-accent/85" routerLink="/manage-vacations">Vacation Status</a>
     </div>
 </nav>

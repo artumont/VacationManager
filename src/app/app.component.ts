@@ -4,9 +4,10 @@ import { NavbarComponent } from './components/ui/navbar/navbar.component';
 
 @Component({
     selector: 'app-root',
+    standalone: true,
     imports: [RouterOutlet, NavbarComponent],
     templateUrl: './app.component.html',
 })
 export class AppComponent {
-    title = 'vacation-manager-ui';
+    title: any;
 }
