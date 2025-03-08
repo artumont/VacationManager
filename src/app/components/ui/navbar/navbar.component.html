@@ -9,9 +9,23 @@
 
     <div [ngClass]="{'hidden': !isMenuOpen, 'flex': isMenuOpen}" class="absolute top-12 right-0 p-10 bg-surface flex-col items-center py-4 shadow-2xl rounded-2xl">
         <a class="text-md py-2 w-full text-center underline-offset-8 hover:underline" routerLink="/">Home</a>
-        <a class="text-md py-2 w-full text-center underline-offset-8 hover:underline" routerLink="/dashboard">Dashboard</a>
-        <a class="text-md py-2 w-full text-center underline-offset-8 hover:underline" routerLink="/request-vacations">Request Vacations</a>
-        <a class="text-md py-2 w-full text-center underline-offset-8 hover:underline" routerLink="/approve-vacations">Approve Vacations</a>
-        <a class="text-md py-2 w-full text-center underline-offset-8 hover:underline" routerLink="/manage-vacations">Vacation Status</a>
+        <!-- @note: Employee Routes -->
+        <div class="border-t border-gray-700 w-full my-2"></div>
+        <span class="text-sm text-gray-400">Employee</span>
+        <a class="text-md py-2 w-full text-center underline-offset-8 hover:underline" routerLink="/employee/request-vacations">Request Vacations</a>
+        <a class="text-md py-2 w-full text-center underline-offset-8 hover:underline" routerLink="/employee/ongoing-vacations">Ongoing Vacations</a>
+        <a class="text-md py-2 w-full text-center underline-offset-8 hover:underline" routerLink="/employee/past-vacations">Past Vacations</a>
+
+        <!-- @note: Manager Routes -->
+        <div class="border-t border-gray-700 w-full my-2"></div>
+        <span class="text-sm text-gray-400">Manager</span>
+        <a class="text-md py-2 w-full text-center underline-offset-8 hover:underline" routerLink="/manager/approve-vacations">Approve Vacations</a>
+        <a class="text-md py-2 w-full text-center underline-offset-8 hover:underline" routerLink="/manager/manage-vacations">Manage Vacations</a>
+
+        <!-- @note: Admin Routes -->
+        <div class="border-t border-gray-700 w-full my-2"></div>
+        <span class="text-sm text-gray-400">Admin</span>
+        <a class="text-md py-2 w-full text-center underline-offset-8 hover:underline" routerLink="/admin/manage-permissions">Manage Permissions</a>
+        <a class="text-md py-2 w-full text-center underline-offset-8 hover:underline" routerLink="/admin/configure-holidays">Configure Holidays</a>
     </div>
 </nav>
