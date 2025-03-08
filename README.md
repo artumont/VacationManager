@@ -8,7 +8,7 @@ This is a simple vacation manager UI built with Angular and Tailwind CSS, mainly
 
 ### Employee View
 
-- [ ] `/employee/request-vacation`: Request vacation page
+- [ ] `/employee/request-vacations`: Request vacation page
 - [ ] `/employee/ongoing-vacations`: Ongoing vacations page
 - [ ] `/employee/past-vacations`: Past vacations page
 
