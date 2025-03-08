@@ -15,6 +15,7 @@
     --font-lexend: "Lexend", sans-serif;
     --color-accent: var(--color-accent);
     --color-primary: var(--color-primary);
+    --color-secondary: var(--color-secondary);
     --color-background: var(--color-background);
     --color-surface: var(--color-surface);
     --color-error: var(--color-error);
