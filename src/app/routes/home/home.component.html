@@ -1,4 +1,4 @@
-<section class="w-full h-full items-center">
+<section class="w-full h-full items-center p-2">
     <div class="flex flex-col items-center justify-center h-full bg-surface mx-4 md:mx-22 p-4 md:p-10 py-10 md:py-26 rounded-xl mb-5">
         <h1 class="text-4xl md:text-6xl font-bold text-center">Welcome to Vacation Manager</h1>
         <p class="text-base md:text-lg text-center">This is a simple vacation manager UI built with Angular and Tailwind CSS</p>
@@ -10,20 +10,15 @@
             <h1 class="text-xl md:text-2xl font-bold text-center">Employee UIs</h1>
         </div>
         <div class="flex flex-wrap justify-center items-center">
-            <div class="flex flex-col justify-center bg-surface p-4 md:p-5 rounded-xl m-3 md:m-5 w-full md:w-[45%] lg:w-1/4 h-auto md:h-82 lg:h-72">
+            <div class="flex flex-col justify-between bg-surface p-4 md:p-5 rounded-xl m-3 md:m-5 w-full md:w-[45%] lg:w-1/4 h-auto md:h-82 lg:h-72">
                 <h1 class="text-xl md:text-2xl font-bold text-center mb-1 p-2 rounded-3xl break-words">/employee/request-vacation</h1>
                 <p class="text-base md:text-lg text-center">This page is used by employees to request vacations</p>
                 <button class="bg-primary text-white p-3 rounded-xl mt-5 hover:cursor-pointer hover:transform hover:-scale-[1.03] transition-transform duration-200" onclick="window.location.href='/employee/request-vacations'">Go to Route</button>
             </div>
-            <div class="flex flex-col justify-center bg-surface p-4 md:p-5 rounded-xl m-3 md:m-5 w-full md:w-[45%] lg:w-1/4 h-auto md:h-82 lg:h-72">
-                <h1 class="text-xl md:text-2xl font-bold text-center mb-1 p-2 rounded-3xl break-words">/employee/ongoing-vacations</h1>
+            <div class="flex flex-col justify-between bg-surface p-4 md:p-5 rounded-xl m-3 md:m-5 w-full md:w-[45%] lg:w-1/4 h-auto md:h-82 lg:h-72">
+                <h1 class="text-xl md:text-2xl font-bold text-center mb-1 p-2 rounded-3xl break-words">/employee/vacation-dashboard</h1>
                 <p class="text-base md:text-lg text-center">This page shows current and upcoming vacations</p>
-                <button class="bg-primary text-white p-3 rounded-xl mt-5 hover:cursor-pointer hover:transform hover:-scale-[1.03] transition-transform duration-200" onclick="window.location.href='/employee/ongoing-vacations'">Go to Route</button>
-            </div>
-            <div class="flex flex-col justify-center bg-surface p-4 md:p-5 rounded-xl m-3 md:m-5 w-full md:w-[45%] lg:w-1/4 h-auto md:h-82 lg:h-72">
-                <h1 class="text-xl md:text-2xl font-bold text-center mb-1 p-2 rounded-3xl break-words">/employee/past-vacations</h1>
-                <p class="text-base md:text-lg text-center">This page shows the history of past vacations</p>
-                <button class="bg-primary text-white p-3 rounded-xl mt-5 hover:cursor-pointer hover:transform hover:-scale-[1.03] transition-transform duration-200" onclick="window.location.href='/employee/past-vacations'">Go to Route</button>
+                <button class="bg-primary text-white p-3 rounded-xl mt-5 hover:cursor-pointer hover:transform hover:-scale-[1.03] transition-transform duration-200" onclick="window.location.href='/employee/vacation-dashboard'">Go to Route</button>
             </div>
         </div>
     </div>
@@ -34,12 +29,12 @@
             <h1 class="text-xl md:text-2xl font-bold text-center">Manager UIs</h1>
         </div>
         <div class="flex flex-wrap justify-center items-center">
-            <div class="flex flex-col justify-center bg-surface p-4 md:p-5 rounded-xl m-3 md:m-5 w-full md:w-[45%] lg:w-1/4 h-auto md:h-82 lg:h-72">
+            <div class="flex flex-col justify-between bg-surface p-4 md:p-5 rounded-xl m-3 md:m-5 w-full md:w-[45%] lg:w-1/4 h-auto md:h-82 lg:h-72">
                 <h1 class="text-xl md:text-2xl font-bold text-center mb-1 p-2 rounded-3xl break-words">/manager/approve-vacations</h1>
                 <p class="text-base md:text-lg text-center">This page is used by managers to approve vacations</p>
                 <button class="bg-primary text-white p-3 rounded-xl mt-5 hover:cursor-pointer hover:transform hover:-scale-[1.03] transition-transform duration-200" onclick="window.location.href='/manager/approve-vacations'">Go to Route</button>
             </div>
-            <div class="flex flex-col justify-center bg-surface p-4 md:p-5 rounded-xl m-3 md:m-5 w-full md:w-[45%] lg:w-1/4 h-auto md:h-82 lg:h-72">
+            <div class="flex flex-col justify-between bg-surface p-4 md:p-5 rounded-xl m-3 md:m-5 w-full md:w-[45%] lg:w-1/4 h-auto md:h-82 lg:h-72">
                 <h1 class="text-xl md:text-2xl font-bold text-center mb-1 p-2 rounded-3xl break-words">/manager/manage-vacations</h1>
                 <p class="text-base md:text-lg text-center">This page is used by managers to manage team vacations</p>
                 <button class="bg-primary text-white p-3 rounded-xl mt-5 hover:cursor-pointer hover:transform hover:-scale-[1.03] transition-transform duration-200" onclick="window.location.href='/manager/manage-vacations'">Go to Route</button>
@@ -53,12 +48,12 @@
             <h1 class="text-xl md:text-2xl font-bold text-center">Admin UIs</h1>
         </div>
         <div class="flex flex-wrap justify-center items-center">
-            <div class="flex flex-col justify-center bg-surface p-4 md:p-5 rounded-xl m-3 md:m-5 w-full md:w-[45%] lg:w-1/4 h-auto md:h-82 lg:h-72">
+            <div class="flex flex-col justify-between bg-surface p-4 md:p-5 rounded-xl m-3 md:m-5 w-full md:w-[45%] lg:w-1/4 h-auto md:h-82 lg:h-72">
                 <h1 class="text-xl md:text-2xl font-bold text-center mb-1 p-2 rounded-3xl break-words">/admin/manage-permissions</h1>
                 <p class="text-base md:text-lg text-center">This page is used by admins to manage permissions</p>
                 <button class="bg-primary text-white p-3 rounded-xl mt-5 hover:cursor-pointer hover:transform hover:-scale-[1.03] transition-transform duration-200" onclick="window.location.href='/admin/manage-permissions'">Go to Route</button>
             </div>
-            <div class="flex flex-col justify-center bg-surface p-4 md:p-5 rounded-xl m-3 md:m-5 w-full md:w-[45%] lg:w-1/4 h-auto md:h-82 lg:h-72">
+            <div class="flex flex-col justify-between bg-surface p-4 md:p-5 rounded-xl m-3 md:m-5 w-full md:w-[45%] lg:w-1/4 h-auto md:h-82 lg:h-72">
                 <h1 class="text-xl md:text-2xl font-bold text-center mb-1 p-2 rounded-3xl break-words">/admin/configure-holidays</h1>
                 <p class="text-base md:text-lg text-center">This page is used by admins to configure company holidays</p>
                 <button class="bg-primary text-white p-3 rounded-xl mt-5 hover:cursor-pointer hover:transform hover:-scale-[1.03] transition-transform duration-200" onclick="window.location.href='/admin/configure-holidays'">Go to Route</button>

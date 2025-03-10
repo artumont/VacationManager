@@ -1,0 +1,67 @@
+<section class="w-full h-full p-4">
+    <div class="flex flex-row w-full mb-4">
+        <div class="flex flex-col w-full bg-surface py-10 rounded-xl justify-between mr-4">
+            <h1 class="text-lg md:text-2xl font-bold text-center">Vacation Status:</h1>
+            <div class="flex flex-col md:flex-row items-center justify-center">
+                <svg class="w-10 h-10" viewBox="0 0 100 100" *ngIf="isOnVacation">
+                    <circle
+                        cx="50"
+                        cy="50"
+                        r="35"
+                        fill="currentColor"
+                        class="text-success animate-pulse"
+                    />
+                </svg>
+                <svg class="w-10 h-10" viewBox="0 0 100 100" *ngIf="!isOnVacation">
+                    <circle
+                        cx="50"
+                        cy="50"
+                        r="35"
+                        fill="currentColor"
+                        class="text-error"
+                    />
+                </svg>
+                <h2 class="text-2xl font-semibold" [ngClass]="{'text-success': isOnVacation, 'text-error': !isOnVacation}">
+                    {{isOnVacation ? 'Active' : 'Inactive'}}
+                </h2>
+            </div>
+        </div>
+        <div class="flex flex-col w-full bg-surface py-10 rounded-xl justify-between">
+            <h1 class="text-lg md:text-2xl font-bold text-center">Days Left:</h1>
+            <div class="flex flex-col md:flex-row items-center justify-center">
+                <h2 class="text-2xl font-semibold">{{daysLeft}} Days</h2>
+            </div>
+        </div>
+    </div>
+    
+    <!-- @note: Vacations List -->
+    <div class="flex flex-col w-full bg-surface p-5 rounded-xl items-center h-screen">
+        <h1 class="text-2xl font-bold mb-5">Past Vacations</h1>
+        <div class="w-full h-full border-collapse border border-gray-600 rounded-xl">
+            <table class="w-full text-center">
+                <thead class="border-b-2 border-gray-600">
+                    <tr>
+                        <th class="p-2">ID</th>
+                        <th class="p-2">Reason</th>
+                        <th class="p-2">Date Range</th>
+                        <th class="p-2">Requested</th>
+                        <th class="p-2">Approved</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let vacation of vacations" class="border-b-2 border-gray-600">
+                        <td class="p-2">{{ vacation.id }}</td>
+                        <td class="p-2">{{ vacation.reason }}</td>
+                        <td class="p-2">{{ vacation.startDate }} - {{ vacation.endDate }}</td>
+                        <td class="p-2">{{ vacation.requestDate }}</td>
+                        <td class="p-2" [ngClass]="{
+                            'text-success': vacation.approved === 'True',
+                            'text-error': vacation.approved === 'False',
+                            'text-warning': vacation.approved === 'Pending'
+                        }">{{ vacation.approved }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
