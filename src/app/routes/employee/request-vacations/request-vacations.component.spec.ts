@@ -3,21 +3,21 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RequestVacationsComponent } from './request-vacations.component';
 
 describe('RequestVacationsComponent', () => {
-  let component: RequestVacationsComponent;
-  let fixture: ComponentFixture<RequestVacationsComponent>;
+    let component: RequestVacationsComponent;
+    let fixture: ComponentFixture<RequestVacationsComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [RequestVacationsComponent]
-    })
-    .compileComponents();
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [RequestVacationsComponent]
+        })
+            .compileComponents();
 
-    fixture = TestBed.createComponent(RequestVacationsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+        fixture = TestBed.createComponent(RequestVacationsComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

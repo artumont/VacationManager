@@ -49,7 +49,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let vacation of vacations" class="border-b-2 border-gray-600">
+                    <tr *ngFor="let vacation of vacations; last as isLast" [ngClass]="{'border-b-2 border-gray-600': !isLast}">
                         <td class="p-2">{{ vacation.id }}</td>
                         <td class="p-2">{{ vacation.reason }}</td>
                         <td class="p-2">{{ vacation.startDate }} - {{ vacation.endDate }}</td>
