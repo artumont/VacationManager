@@ -26,7 +26,7 @@ export class RequestVacationsComponent {
         if (this.vacationForm.valid) {
             // @note: On a real application, this would be a service call to the backend, for now we will just log the data
             console.log('Form Data:', this.vacationForm.value);
-            alert('Vacation Requested!\nCheck the console for the form data.');
+            alert(`Vacation Requested!\n\n${Object.entries(this.vacationForm.value).map(([key, value]) => `${key}: ${value}`).join('\n')}`);
         }
     }
 }
