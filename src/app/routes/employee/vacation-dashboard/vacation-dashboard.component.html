@@ -55,8 +55,8 @@
                         <td class="p-2">{{ vacation.startDate }} - {{ vacation.endDate }}</td>
                         <td class="p-2">{{ vacation.requestDate }}</td>
                         <td class="p-2" [ngClass]="{
-                            'text-success': vacation.approved === 'True',
-                            'text-error': vacation.approved === 'False',
+                            'text-success': vacation.approved === 'Yes',
+                            'text-error': vacation.approved === 'No',
                             'text-warning': vacation.approved === 'Pending'
                         }">{{ vacation.approved }}</td>
                     </tr>
