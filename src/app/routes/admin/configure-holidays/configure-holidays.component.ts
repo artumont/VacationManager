@@ -1,24 +1,40 @@
-import { NgClass, NgFor } from '@angular/common';
+import { NgClass, NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
-import { LucideAngularModule, Plus, Minus, Pencil, Check } from 'lucide-angular';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { LucideAngularModule, Plus, Minus, Pencil, Check, X } from 'lucide-angular';
+import { FormArray, FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+
+interface DateRange {
+    start: string;
+    end: string;
+    description?: string;
+}
 
 @Component({
     selector: 'app-configure-holidays',
-    imports: [ReactiveFormsModule, NgFor, NgClass, LucideAngularModule],
+    imports: [ReactiveFormsModule, NgFor, NgClass, NgIf, LucideAngularModule],
     templateUrl: './configure-holidays.component.html',
+    styles: [`
+        .date-range {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 0.5rem;
+        }
+    `],
+    standalone: true
 })
 export class ConfigureHolidaysComponent {
     readonly PlusIcon = Plus;
     readonly MinusIcon = Minus;
     readonly EditIcon = Pencil;
     readonly CheckIcon = Check;
+    readonly CloseIcon = X;
 
-    years: {year: string, dates: string[]}[] = [
-        {year: '2021', dates: ['2021-01-01', '2021-12-31']},
-        {year: '2022', dates: ['2022-01-01', '2022-12-31']},
-        {year: '2023', dates: ['2023-01-01', '2023-12-31']},
-        {year: '2024', dates: ['2024-01-01', '2024-12-31']},
+    years: Array<{year: string, dates: DateRange[]}> = [
+        {year: '2024', dates: [
+            {start: '2023-12-31', end: '2024-01-02', description: 'New Year'},
+            {start: '2024-12-25', end: '2024-12-27', description: 'Christmas'}
+        ]},
     ];
 
     yearForm: FormGroup;
@@ -26,22 +42,54 @@ export class ConfigureHolidaysComponent {
     showEditForm = false;
     currentYear: string = 'none';
     
+    get dateRanges() {
+        return this.editForm.get('dates') as FormArray;
+    }
+    
     constructor(private fb: FormBuilder) {
         this.yearForm = this.fb.group({
-            year: ['2025', Validators.required],
+            year: [new Date().getFullYear().toString(), [
+                Validators.required,
+                Validators.min(2000),
+                Validators.max(2100)
+            ]],
         });
 
         this.editForm = this.fb.group({
-            dates: ['2025-01-01', Validators.required],
+            dates: this.fb.array([])
         });
     }
 
+    createDateRange() {
+        return this.fb.group({
+            start: ['', Validators.required],
+            end: ['', Validators.required],
+            description: ['']
+        });
+    }
+
+    addDateRange() {
+        this.dateRanges.push(this.createDateRange());
+    }
+
+    removeDateRange(index: number) {
+        this.dateRanges.removeAt(index);
+    }
+
     addYear() {
+        // @note: On a real application, this would be a service call to the backend, for now we will just log the data and add it to the list in frontend
         if (this.yearForm.valid) {
-            // @note: On a real application, this would be a service call to the backend, for now we will just log the data and add it to a list in frontend
-            this.years.push({year: this.yearForm.value.year, dates: [`${this.yearForm.value.year}-01-01`, `${this.yearForm.value.year}-12-31`]});
-            console.log('Form Data:', this.yearForm.value);
-            alert(`Year Added!\n\n${Object.entries(this.yearForm.value).map(([key, value]) => `${key}: ${value}`).join('\n')}`);
+            const year = this.yearForm.value.year;
+            if (this.years.some(y => y.year === year)) {
+                alert('This year already exists!');
+                return;
+            }
+            this.years.push({
+                year: year,
+                dates: []
+            });
+            this.years.sort((a, b) => parseInt(a.year) - parseInt(b.year));
+            this.yearForm.patchValue({year: (parseInt(year) + 1).toString()});
         }
     }
 
@@ -63,26 +111,56 @@ export class ConfigureHolidaysComponent {
     editUIToggle(year: string) {
         this.showEditForm = true;
         this.currentYear = year;
+        while (this.dateRanges.length) {
+            this.dateRanges.removeAt(0);
+        }
+        
         const foundYear = this.years.find(y => y.year === year);
         if (foundYear) {
-            this.editForm.patchValue({dates: foundYear.dates});
+            foundYear.dates.forEach(date => {
+                const dateGroup = this.createDateRange();
+                dateGroup.patchValue(date);
+                this.dateRanges.push(dateGroup);
+            });
+        }
+        
+        if (this.dateRanges.length === 0) {
+            this.addDateRange();
         }
     }
 
+    validateDates(): boolean {
+        for (let i = 0; i < this.dateRanges.length; i++) {
+            const range = this.dateRanges.at(i).value;
+            if (range.start > range.end) {
+                alert('End date cannot be before start date');
+                return false;
+            }
+            for (let j = i + 1; j < this.dateRanges.length; j++) {
+                const otherRange = this.dateRanges.at(j).value;
+                if (
+                    (range.start >= otherRange.start && range.start <= otherRange.end) ||
+                    (range.end >= otherRange.start && range.end <= otherRange.end) ||
+                    (otherRange.start >= range.start && otherRange.start <= range.end)
+                ) {
+                    alert('Date ranges cannot overlap');
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     editYear() {
-        if (this.editForm.valid) {
-            // @note: On a real application, this would be a service call to the backend, for now we will just log the data and update the list in frontend
+        // @note: On a real application, this would be a service call to the backend, for now we will just log the data and update it in the list in frontend
+        if (this.editForm.valid && this.validateDates()) {
             const foundYear = this.years.find(y => y.year === this.currentYear);
             if (foundYear) {
-                foundYear.dates = this.editForm.value.dates;
-            }
-            else {
-                alert('Year not found!');
+                foundYear.dates = this.dateRanges.value;
+                foundYear.dates.sort((a, b) => a.start.localeCompare(b.start));
             }
             this.showEditForm = false;
             this.currentYear = 'none';
-            console.log('Form Data:', this.editForm.value);
-            alert(`Year Edited!\n\n${Object.entries(this.editForm.value).map(([key, value]) => `${key}: ${value}`).join('\n')}`);
         }
     }
 }

@@ -7,21 +7,20 @@
                     type="number" 
                     placeholder="Year" 
                     formControlName="year"
-                    [defaultValue]="2025"
                     class="p-3 rounded-xl border border-gray-300 w-full focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors mr-2" 
                 />
                 <button 
                     [disabled]="!yearForm.valid" 
                     type="submit"
-                    class="bg-success p-2 rounded-full text-2xl font-semibold hover:bg-success/70" 
+                    class="bg-success p-2 rounded-full text-2xl font-semibold hover:bg-success/70 disabled:opacity-50 disabled:hover:bg-success" 
                 ><i-lucide [img]="PlusIcon"></i-lucide></button>
             </form>
             <div class="w-full overflow-x-auto border border-gray-600 rounded-xl mt-6">
                 <table class="min-w-max w-full text-center">
                     <thead>
                         <tr class="border-b-2 border-gray-600">
-                            <th class="p-2">Years</th>
-                            <th class="p-2">Dates</th>
+                            <th class="p-2">Year</th>
+                            <th class="p-2">Holidays</th>
                             <th class="p-2">Actions</th>
                         </tr>
                     </thead>
@@ -29,7 +28,12 @@
                         <tr *ngFor="let yearObj of years; last as isLast" 
                             [ngClass]="{'border-b border-gray-600': !isLast}">
                             <td class="p-2">{{ yearObj.year }}</td>
-                            <td class="p-2">{{ yearObj.dates.toString().replaceAll(",", ", ") }}</td>
+                            <td class="p-2 text-left">
+                                <div *ngFor="let date of yearObj.dates" class="mb-1">
+                                    {{ date.start === date.end ? date.start : date.start + ' to ' + date.end }}
+                                    <span *ngIf="date.description" class="text-gray-400 ml-2">({{date.description}})</span>
+                                </div>
+                            </td>
                             <td class="p-2">
                                 <button 
                                     (click)="deleteYear(yearObj.year)" 
@@ -46,21 +50,51 @@
             </div>
         </div>
     </div>
-    <div [ngClass]="{'hidden': !showEditForm}">
+    <div [ngClass]="{'hidden': !showEditForm}" class="relative">
         <div class="max-w-3xl mx-auto bg-surface rounded-xl p-8 mt-4">
-            <h1 class="text-lg font-semibold mb-2">Editing year: {{currentYear}}</h1>
-            <form [formGroup]="editForm" (ngSubmit)="editYear()" class="flex flex-row">
-                <input 
-                    type="date" 
-                    placeholder="Dates" 
-                    formControlName="dates"
-                    class="p-3 rounded-xl border border-gray-300 w-full focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors mr-2 [color-scheme:dark]"
-                />
-                <button 
-                    [disabled]="!editForm.valid" 
-                    type="submit"
-                    class="bg-primary p-2 rounded-full text-2xl font-semibold hover:bg-primary/70" 
-                ><i-lucide [img]="CheckIcon"></i-lucide></button>
+            <h1 class="text-lg font-semibold mb-4">Editing year: {{currentYear}}</h1>
+            <form [formGroup]="editForm" (ngSubmit)="editYear()">
+                <div formArrayName="dates">
+                    <div *ngFor="let dateRange of dateRanges.controls; let i=index" [formGroupName]="i" class="date-range">
+                        <div class="flex-1">
+                            <div class="grid grid-cols-[1fr_1fr_2fr] gap-2">
+                                <input 
+                                    type="date" 
+                                    formControlName="start"
+                                    class="p-3 rounded-xl border border-gray-300 w-full focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors [color-scheme:dark]"
+                                />
+                                <input 
+                                    type="date" 
+                                    formControlName="end"
+                                    class="p-3 rounded-xl border border-gray-300 w-full focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors [color-scheme:dark]"
+                                />
+                                <input 
+                                    type="text" 
+                                    placeholder="Description (optional)" 
+                                    formControlName="description"
+                                    class="p-3 rounded-xl border border-gray-300 w-full focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors"
+                                />
+                            </div>
+                        </div>
+                        <button 
+                            type="button"
+                            (click)="removeDateRange(i)"
+                            class="bg-error p-2 rounded-full text-xl font-semibold hover:bg-error/70 ml-2" 
+                        ><i-lucide [img]="CloseIcon"></i-lucide></button>
+                    </div>
+                </div>
+                <div class="flex justify-between mt-4">
+                    <button 
+                        type="button"
+                        (click)="addDateRange()"
+                        class="bg-success px-4 py-2 rounded-xl text-sm font-semibold hover:bg-success/70" 
+                    >Add Holiday</button>
+                    <button 
+                        type="submit"
+                        [disabled]="!editForm.valid"
+                        class="bg-primary px-6 py-2 rounded-xl text-sm font-semibold hover:bg-primary/70" 
+                    >Save Changes</button>
+                </div>
             </form>
         </div>
     </div>
