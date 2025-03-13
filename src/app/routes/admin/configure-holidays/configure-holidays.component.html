@@ -13,8 +13,8 @@
                 <button 
                     [disabled]="!yearForm.valid" 
                     type="submit"
-                    class="bg-success p-2 rounded-full text-2xl font-semibold" 
-                >+</button>
+                    class="bg-success p-2 rounded-full text-2xl font-semibold hover:bg-success/70" 
+                ><i-lucide [img]="PlusIcon"></i-lucide></button>
             </form>
             <div class="w-full overflow-x-auto border border-gray-600 rounded-xl mt-6">
                 <table class="min-w-max w-full text-center">
@@ -29,23 +29,39 @@
                         <tr *ngFor="let yearObj of years; last as isLast" 
                             [ngClass]="{'border-b border-gray-600': !isLast}">
                             <td class="p-2">{{ yearObj.year }}</td>
-                            <td class="p-2">{{ yearObj.dates.replace(",", ", ") }}</td>
+                            <td class="p-2">{{ yearObj.dates.toString().replaceAll(",", ", ") }}</td>
                             <td class="p-2">
                                 <button 
                                     (click)="deleteYear(yearObj.year)" 
-                                    class="bg-error p-2 rounded-full text-2xl font-semibold" 
-                                >-</button>
-                            </td>
-                            <td class="p-2">
+                                    class="bg-error m-1 p-2 rounded-full text-2xl font-semibold hover:bg-error/70" 
+                                ><i-lucide [img]="MinusIcon"></i-lucide></button>
                                 <button 
-                                    (click)="editYear(yearObj.year)" 
-                                    class="bg-primary p-2 rounded-full text-2xl font-semibold" 
-                                >Edit</button>
+                                    (click)="editUIToggle(yearObj.year)" 
+                                    class="bg-primary m-1 p-2 rounded-full text-2xl font-semibold hover:bg-primary/70" 
+                                ><i-lucide [img]="EditIcon"></i-lucide></button>
                             </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
+        </div>
+    </div>
+    <div [ngClass]="{'hidden': !showEditForm}">
+        <div class="max-w-3xl mx-auto bg-surface rounded-xl p-8 mt-4">
+            <h1 class="text-lg font-semibold mb-2">Editing year: {{currentYear}}</h1>
+            <form [formGroup]="editForm" (ngSubmit)="editYear()" class="flex flex-row">
+                <input 
+                    type="date" 
+                    placeholder="Dates" 
+                    formControlName="dates"
+                    class="p-3 rounded-xl border border-gray-300 w-full focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors mr-2 [color-scheme:dark]"
+                />
+                <button 
+                    [disabled]="!editForm.valid" 
+                    type="submit"
+                    class="bg-primary p-2 rounded-full text-2xl font-semibold hover:bg-primary/70" 
+                ><i-lucide [img]="CheckIcon"></i-lucide></button>
+            </form>
         </div>
     </div>
 </section>
