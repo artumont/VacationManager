@@ -51,7 +51,7 @@
         </div>
     </div>
     <div [ngClass]="{'hidden': !showEditForm}" class="relative">
-        <div class="max-w-3xl mx-auto bg-surface rounded-xl p-8 mt-4">
+        <div class="max-w-3xl mx-auto bg-surface rounded-xl p-8 mt-4 overflow-x-auto">
             <h1 class="text-lg font-semibold mb-4">Editing year: {{currentYear}}</h1>
             <form [formGroup]="editForm" (ngSubmit)="editYear()">
                 <div formArrayName="dates">
