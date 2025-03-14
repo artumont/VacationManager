@@ -3,21 +3,21 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ManagePermissionsComponent } from './manage-permissions.component';
 
 describe('ManagePermissionsComponent', () => {
-  let component: ManagePermissionsComponent;
-  let fixture: ComponentFixture<ManagePermissionsComponent>;
+    let component: ManagePermissionsComponent;
+    let fixture: ComponentFixture<ManagePermissionsComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [ManagePermissionsComponent]
-    })
-    .compileComponents();
+    beforeEach(async () => {
+        await TestBed.configureTestingModule({
+            imports: [ManagePermissionsComponent]
+        })
+            .compileComponents();
 
-    fixture = TestBed.createComponent(ManagePermissionsComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+        fixture = TestBed.createComponent(ManagePermissionsComponent);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

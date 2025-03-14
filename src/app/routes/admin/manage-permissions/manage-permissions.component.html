@@ -1,1 +1,51 @@
-<p>manage-permissions works!</p>
+<section class="w-full h-full p-4">
+    <div class="max-w-6xl mx-auto bg-surface rounded-xl p-8">
+        <form [formGroup]="addEmployeeForm" (ngSubmit)="addEmployee()" class="flex flex-row">
+            <input 
+                type="text" 
+                placeholder="Employee name" 
+                formControlName="name"
+                class="p-3 rounded-xl border border-gray-300 w-full focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors mr-2" 
+            />
+            <button 
+                type="submit" 
+                class="bg-primary p-3 rounded-xl text-white font-semibold hover:bg-primary/70"
+            ><i-lucide [img]="PlusIcon"></i-lucide></button>
+        </form>
+        <div class="w-full overflow-x-auto border border-gray-600 rounded-xl mt-6">
+            <table class="min-w-max w-full text-center">
+                <thead>
+                    <tr class="border-b-2 border-gray-600">
+                        <th class="p-2">Name</th>
+                        <th class="p-2">See</th>
+                        <th class="p-2">Approve</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let employee of employees; last as isLast"
+                        [ngClass]="{'border-b border-gray-600': !isLast}">
+                        <td class="p-2">{{ employee.name }}</td>
+                        <td class="p-2">
+                            <div class="flex justify-center items-center">
+                                <div class="relative inline-block w-10 h-5 cursor-pointer"
+                                     (click)="toggleSee(employee.name)">
+                                    <input type="checkbox" [checked]="employee.canSee" class="sr-only peer" />
+                                    <div class="w-10 h-5 bg-gray-600 rounded-full peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="p-2">
+                            <div class="flex justify-center items-center">
+                                <div class="relative inline-block w-10 h-5 cursor-pointer"
+                                     (click)="toggleApprove(employee.name)">
+                                    <input type="checkbox" [checked]="employee.canApprove" class="sr-only peer" />
+                                    <div class="w-10 h-5 bg-gray-600 rounded-full peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
