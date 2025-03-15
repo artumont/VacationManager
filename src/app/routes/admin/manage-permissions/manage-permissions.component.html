@@ -8,6 +8,7 @@
                 class="p-3 rounded-xl border border-gray-300 w-full focus:border-primary focus:ring-1 focus:ring-primary outline-none transition-colors mr-2" 
             />
             <button 
+                [disabled]="!addEmployeeForm.valid" 
                 type="submit" 
                 class="bg-primary p-3 rounded-xl text-white font-semibold hover:bg-primary/70"
             ><i-lucide [img]="PlusIcon"></i-lucide></button>
@@ -19,6 +20,7 @@
                         <th class="p-2">Name</th>
                         <th class="p-2">See</th>
                         <th class="p-2">Approve</th>
+                        <th class="p-2">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,6 +44,12 @@
                                     <div class="w-10 h-5 bg-gray-600 rounded-full peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-primary"></div>
                                 </div>
                             </div>
+                        </td>
+                        <td class="p-2">
+                            <button 
+                                class="bg-error p-2 rounded-xl text-white font-semibold hover:bg-error/70"
+                                (click)="deleteEmployee(employee.name)"
+                            ><i-lucide [img]="TrashIcon"></i-lucide></button>
                         </td>
                     </tr>
                 </tbody>

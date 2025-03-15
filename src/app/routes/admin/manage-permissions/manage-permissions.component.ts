@@ -1,7 +1,7 @@
 import { NgClass, NgFor } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { LucideAngularModule, Plus } from 'lucide-angular';
+import { LucideAngularModule, Plus, Trash } from 'lucide-angular';
 
 @Component({
     selector: 'app-manage-permissions',
@@ -10,6 +10,7 @@ import { LucideAngularModule, Plus } from 'lucide-angular';
 })
 export class ManagePermissionsComponent {
     readonly PlusIcon = Plus;
+    readonly TrashIcon = Trash;
 
     addEmployeeForm: FormGroup;
 
@@ -48,13 +49,30 @@ export class ManagePermissionsComponent {
     }
 
     addEmployee() {
+        // @note: This is a simple example, in a real-world application, you should send the data to a server or it should be already stored in a database.
         if (this.addEmployeeForm.valid) {
-            this.employees.push({
-                name: this.addEmployeeForm.value.name,
-                canSee: this.addEmployeeForm.value.canSee,
-                canApprove: this.addEmployeeForm.value.canApprove
-            });
-            this.addEmployeeForm.reset();
+            if (!this.employees.find(emp => emp.name == this.addEmployeeForm.value.name)){
+                this.employees.push({
+                    name: this.addEmployeeForm.value.name,
+                    canSee: this.addEmployeeForm.value.canSee,
+                    canApprove: this.addEmployeeForm.value.canApprove
+                });
+                alert('Employee added');
+            }
+            else {
+                alert('Employee already exists');
+            }
+        }
+    }
+
+    deleteEmployee(employee: string) {
+        // @note: This is a simple example, in a real-world application, you should send the data to a server or it should be already stored in a database.
+        const foundEmployee = this.employees.find(emp => emp.name == employee)
+        if (foundEmployee) {
+            this.employees = this.employees.filter(emp => emp.name !== employee);
+        }
+        else {
+            console.error('Employee not found');
         }
     }
 }
