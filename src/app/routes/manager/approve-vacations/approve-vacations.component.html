@@ -1,1 +1,36 @@
-<p>approve-vacations works!</p>
+<section class="w-full h-full p-4 px-12">
+    <div class="mx-auto bg-surface rounded-xl p-8">
+        <div class="w-full overflow-x-auto border border-gray-600 rounded-xl mt-6">
+            <table class="min-w-max w-full text-center">
+                <thead>
+                    <tr class="border-b-2 border-gray-600">
+                        <th class="p-2">ID</th>
+                        <th class="p-2">Reason</th>
+                        <th class="p-2">Date Range</th>
+                        <th class="p-2">Requested</th>
+                        <th class="p-2">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let vacation of vacations; last as isLast" 
+                        [ngClass]="{'border-b border-gray-600': !isLast}">
+                        <td class="p-2">{{ vacation.id }}</td>
+                        <td class="p-2">{{ vacation.reason }}</td>
+                        <td class="p-2">{{ vacation.startDate }} - {{ vacation.endDate }}</td>
+                        <td class="p-2">{{ vacation.requestDate }}</td>
+                        <td class="p-2">
+                            <button 
+                                class="bg-primary p-2 rounded-xl text-white font-semibold hover:bg-primary/70"
+                                (click)="approveVacation(vacation.id)"
+                            ><i-lucide [img]="CheckIcon"></i-lucide></button>
+                            <button 
+                                class="bg-error p-2 rounded-xl text-white font-semibold hover:bg-error/70"
+                                (click)="rejectVacation(vacation.id)"
+                            ><i-lucide [img]="XIcon"></i-lucide></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
